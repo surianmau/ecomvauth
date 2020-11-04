@@ -11,6 +11,7 @@ class CreateUserSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password':{'write_only': True},}
 
     def create(self, validated_data):
+        # psql velu anna
         user = User.objects.create(**validated_data)
         user.set_password(validated_data['password'])
         user.save()
@@ -31,7 +32,8 @@ class LoginSerializer(serializers.Serializer):
         if username and password :
             if User.objects.filter(username=username).exists():
                 print(username, password)
-                user = authenticate(request = self.context.get('request'), username = username, password=password)
+                # psql velu anna
+                user = authenticate(request = self.context.get('request'),  = username, password= password)
             else:
                 msg = {
                     'detail': 'username number not found',

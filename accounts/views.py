@@ -7,34 +7,13 @@ from django.contrib.auth import get_user_model ,login
 from .serializer import  CreateUserSerializer , LoginSerializer
 
 
-class ValidateUser(APIView):
-    def post(self, request, *args, **kwargs):
-        username = request.data.get('username')
-        if username:
-            username = str(username)
-            user = User.objects.filter(username__iexact=username)
-            if user.exists():
-                return Response({
-                    'status': False,
-                    'detail': 'User name already exists'
-                })
-            else:
-                return Response({
-                    'status': True,
-                    'detail': 'User name created'
-                })
-        else:
-            return Response({
-                    'status': False,
-                    'detail': 'pls enter username'
-                })
-
 
 class Register(APIView):
     def post(self, request):
         username = request.data.get('username', False)
         password = request.data.get('password', False)
         if username and password :
+            # psql velu anna
             old = User.objects.filter(username__iexact=username)
             if old.exists():
                 return Response({
